@@ -1,6 +1,6 @@
 %-------------------------
 % Resume in LaTeX
-% Modern sans-serif layout, ATS-friendly
+% Minimal black-and-white sans-serif layout, ATS-friendly
 %-------------------------
 
 \documentclass[letterpaper,10pt]{article}
@@ -28,16 +28,16 @@
 
 \geometry{
     letterpaper,
-    left=0.6in,
-    right=0.6in,
-    top=0.55in,
-    bottom=0.55in
+    left=0.72in,
+    right=0.72in,
+    top=0.68in,
+    bottom=0.62in
 }
 
-% Accent color
-\definecolor{accent}{HTML}{1F4E79}
-\definecolor{subtle}{HTML}{555555}
-\definecolor{rule}{HTML}{BBBBBB}
+% Minimal monochrome palette
+\definecolor{accent}{HTML}{000000}
+\definecolor{subtle}{HTML}{3F3F3F}
+\definecolor{rule}{HTML}{C9C9C9}
 
 \hypersetup{
     colorlinks=true,
@@ -50,61 +50,45 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Section formatting --- colored bold, thin rule
+% Section formatting --- restrained uppercase heading with a hairline divider
 \titleformat{\section}
-  {\Large\bfseries\color{accent}}
+  {\large\bfseries\addfontfeatures{LetterSpace=5.0}\color{accent}}
   {}{0em}
-  {}
-  [\vspace{2pt}\color{rule}\titlerule\color{black}]
-\titlespacing*{\section}{0pt}{12pt}{10pt}
+  {\MakeUppercase}
+  [\vspace{5pt}\color{rule}\titlerule\color{black}]
+\titlespacing*{\section}{0pt}{15pt}{8pt}
 
 % Custom commands
-% Indent width for body content (icon column)
+% Retain the existing macro signatures, but present a clean text-first layout.
 \newlength{\bodyindent}
-\setlength{\bodyindent}{12mm}
+\setlength{\bodyindent}{0pt}
 
 % #1=icon path  #2=company  #3=location  #4=role  #5=dates
 \newcommand{\jobheading}[5]{%
-  \vspace{8pt}
+  \vspace{10pt}
   \noindent
-  \begin{minipage}[c]{\bodyindent}
-    \centering
-    \includegraphics[width=8mm,height=8mm,keepaspectratio]{#1}
-  \end{minipage}%
-  \begin{minipage}[c]{\dimexpr\textwidth-\bodyindent}
-    \textbf{\large #2}\hfill\textcolor{subtle}{#3}\\
-    \textcolor{subtle}{#4}\hfill\textcolor{subtle}{#5}
-  \end{minipage}
-  \vspace{-4pt}
+  \textbf{#2}\hfill\textcolor{subtle}{#3}\\[-1pt]
+  {\small\textcolor{subtle}{\textit{#4}}\hfill\textcolor{subtle}{#5}}
+  \vspace{-2pt}
 }
 
 % Entry without icon, but aligned with iconned entries
 % #1=title  #2=date
 \newcommand{\plainheading}[2]{%
-  \vspace{4pt}
+  \vspace{7pt}
   \noindent
-  \hspace{\bodyindent}%
-  \begin{minipage}[t]{\dimexpr\textwidth-\bodyindent}
-    \vspace{0pt}
-    \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
-      #1 & \textcolor{subtle}{#2} \\
-    \end{tabular*}
-  \end{minipage}
+  \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
+    #1 & \small\textcolor{subtle}{#2} \\
+  \end{tabular*}
   \vspace{-2pt}
 }
 
 % Entry with icon, single-line (for certs, projects)
 % #1=icon  #2=title  #3=date
 \newcommand{\iconentry}[3]{%
-  \vspace{4pt}
+  \vspace{7pt}
   \noindent
-  \begin{minipage}[c]{\bodyindent}
-    \centering
-    \includegraphics[width=8mm,height=8mm,keepaspectratio]{#1}
-  \end{minipage}%
-  \begin{minipage}[c]{\dimexpr\textwidth-\bodyindent}
-    #2\hfill\textcolor{subtle}{#3}
-  \end{minipage}
+  #2\hfill\small\textcolor{subtle}{#3}
   \vspace{-2pt}
 }
 
@@ -118,36 +102,27 @@
 
 % #1=icon  #2=school  #3=degree  #4=dates
 \newcommand{\eduheading}[4]{%
-  \vspace{4pt}
+  \vspace{7pt}
   \noindent
-  \begin{minipage}[c]{\bodyindent}
-    \centering
-    \includegraphics[width=8mm,height=8mm,keepaspectratio]{#1}
-  \end{minipage}%
-  \begin{minipage}[c]{\dimexpr\textwidth-\bodyindent}
-    \textbf{#2}\hfill\textcolor{subtle}{#4}\\
-    \textcolor{subtle}{#3}
-  \end{minipage}
+  \textbf{#2}\hfill\small\textcolor{subtle}{#4}\\[-1pt]
+  {\small\textcolor{subtle}{#3}}
   \vspace{-2pt}
 }
 
-\setlist[itemize]{leftmargin=\dimexpr\bodyindent+1em, topsep=2pt, itemsep=1pt, parsep=0pt, label=\color{accent}\textbullet}
+\setlist[itemize]{leftmargin=1.25em, topsep=4pt, itemsep=2pt, parsep=0pt, label=\color{accent}\textbullet}
 
 % Sub-role heading within a single job entry (e.g. dual-hat responsibilities)
 \newcommand{\subrole}[1]{%
-  \par\vspace{4pt}\noindent\hspace*{\bodyindent}%
-  \textbf{\color{accent}\small #1}\par\vspace{-2pt}%
+  \par\vspace{5pt}\noindent
+  \textbf{\small\color{accent}\addfontfeatures{LetterSpace=1.4}#1}\par\vspace{-1pt}%
 }
 
 % Highlight tag row beneath job/project title --- appears outside bullet list
 % #1=label (e.g. Stack, Acquired Skills)  #2=content
 \newcommand{\stackline}[2]{%
-  \par\vspace{3pt}
-  \noindent\hspace*{\bodyindent}%
-  \begin{minipage}[t]{\dimexpr\linewidth-\bodyindent}
-    \small\textbf{\color{accent}#1:}~\textcolor{subtle}{#2}
-  \end{minipage}\par
-  \vspace{1pt}
+  \par\vspace{4pt}\noindent
+  \small\textbf{\color{accent}#1:}~\textcolor{subtle}{#2}\par
+  \vspace{2pt}
 }
 
 \setlength{\parindent}{0pt}
@@ -156,9 +131,9 @@
 
 %-------- HEADER --------
 \begin{center}
-    {\huge \textbf{\MakeUppercase{Sajid Pervez}}} \\[3pt]
-    {\Large \color{accent} AI Security Principal \& Application Security Leader} \\[6pt]
-    {\small
+    {\fontsize{24}{28}\selectfont\bfseries\addfontfeatures{LetterSpace=7.0}\MakeUppercase{Sajid Pervez}} \\[5pt]
+    {\small\bfseries\addfontfeatures{LetterSpace=4.0}\color{accent} AI Security Principal \& Application Security Leader} \\[9pt]
+    {\footnotesize\itshape\color{subtle}
         \faPhone\ 0469 366 692 \quad
         \faEnvelope\ \href{mailto:sajid@sajidpervez.com}{sajid@sajidpervez.com} \quad
         \faLinkedin\ \href{https://linkedin.com/in/sajidpervez}{linkedin.com/in/sajidpervez} \quad
@@ -167,7 +142,7 @@
 \end{center}
 
 %-------- SUMMARY --------
-\vspace{6pt}
+\vspace{10pt}
 {\small AI and application security leader with 15+ years securing software, cloud, and AI/ML systems. Hands-on experience leading security architecture and threat modelling for production AI products, RAG pipelines, and agentic systems on AWS; protecting them from adversarial threats, prompt injection, data poisoning, and misuse. Brings deep secure-SDLC, vulnerability-management, DevSecOps automation, break-testing, and technical-leadership experience. Prior NV1 security clearance (inactive).\par}
 
 %-------- EXPERIENCE --------

@@ -157,6 +157,7 @@ jobs:
           fi
 
       - name: Mirror release PDFs into Pages bundle
+        if: github.ref_name == 'main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -180,19 +181,23 @@ jobs:
           done
 
       - name: Generate Pages site
+        if: github.ref_name == 'main'
         run: |
           mkdir -p public
           cp template/index.html public/index.html
           sed -i "s|{{OWNER}}|${{ github.repository_owner }}|g; s|{{REPO}}|${{ github.event.repository.name }}|g" public/index.html
 
       - name: Setup Pages
+        if: github.ref_name == 'main'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: github.ref_name == 'main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'public'
 
       - name: Deploy to Pages
+        if: github.ref_name == 'main'
         id: deployment
         uses: actions/deploy-pages@v4

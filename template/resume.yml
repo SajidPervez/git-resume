@@ -1,5 +1,5 @@
-variant: general
-label: AI Security Principal
+variant: oracle-lead-principal-security
+label: Oracle — Lead Principal Security Software Engineer
 author: "Sajid Pervez"
 template: "Template_Resume.tex"
-output: "Sajid_Pervez_AI_Security"
+output: "Sajid_Pervez_Oracle_Lead_Principal_Security"

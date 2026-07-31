@@ -156,97 +156,84 @@
 
 %-------- HEADER --------
 \begin{center}
-    {\huge \textbf{\MakeUppercase{John Doe}}} \\[3pt]
-    {\Large \color{accent} Staff Data Engineer} \\[6pt]
+    {\huge \textbf{\MakeUppercase{Sajid Pervez}}} \\[3pt]
+    {\Large \color{accent} AI Security Principal} \\[6pt]
     {\small
-        \faEnvelope\ \href{mailto:john.doe@example.com}{john.doe@example.com} \quad
-        \faLinkedin\ \href{https://linkedin.com/in/johndoe}{/in/johndoe} \quad
-        \faGithub\ \href{https://github.com/johndoe}{github.com/johndoe} \quad
-        \faMapMarker*\ San Francisco, CA
+        \faPhone\ 0469 366 692 \quad
+        \faEnvelope\ \href{mailto:sajid@sajidpervez.com}{sajid@sajidpervez.com} \quad
+        \faLinkedin\ \href{https://linkedin.com/in/sajidpervez}{linkedin.com/in/sajidpervez} \quad
+        \faMapMarker*\ Melbourne, VIC
     }
 \end{center}
 
 %-------- SUMMARY --------
 \vspace{6pt}
-{\small Staff Data Engineer with 8+ years designing and operating distributed data systems at scale. Led data platform initiatives serving 500+ engineers and petabyte-scale analytics workloads. Deep expertise in Apache Spark, Flink, Kafka, and real-time streaming architectures. Open-source contributor and maintainer of multiple data infrastructure projects.\par}
+{\small AI Security professional with 15+ years in cybersecurity, specialising in securing AI/ML systems on AWS cloud ecosystems. Proven experience protecting AI models, data pipelines, and RAG architectures from adversarial threats, prompt injection, data poisoning, and misuse. Hands-on leader in threat modelling, break testing, vulnerability assessment, incident response, DevSecOps automation, and Agile delivery. Prior NV1 security clearance (inactive).\par}
 
 %-------- EXPERIENCE --------
 \section{Experience}
 
-\jobheading{icons/company.png}{Nexus Technologies}{San Francisco, CA}{Staff Data Engineer}{Jan 2022 -- Present}
-\subrole{Data Platform --- Real-time analytics infrastructure}
+\jobheading{icons/company.png}{MYOB}{Melbourne, VIC}{Principal AI Security Engineer}{May 2025 -- Present}
+\subrole{AI product security --- AWS-hosted AI systems and models}
 \begin{itemize}
     \small
-    \item Designed and built a unified \textbf{real-time analytics platform} processing \textbf{2M+ events/sec} using Apache Kafka, Flink, and Pinot, serving sub-second OLAP queries across 12 product teams with 99.99\% uptime SLA.
-    \item Migrated the company's \textbf{10 PB+ data lake} from Hive-managed Parquet on HDFS to \textbf{Apache Iceberg on S3} with incremental table maintenance, reducing storage costs by 40\% and improving query latencies through Iceberg's native partitioning and file pruning.
-    \item Built an \textbf{internal data discovery and lineage platform} (Apache Atlas + custom enrichment layer) that indexed 15K+ datasets, tracked column-level lineage across 300+ pipelines, and reduced data incident MTTR from 4 hours to 15 minutes.
-    \item Architected a \textbf{multi-region streaming replication layer} with Kafka MirrorMaker 2 and hybrid active-active conflict resolution, enabling the company to serve EU customers from ``Frankfurt with sub-50ms p99 latencies.
-    \item Led the \textbf{data engineer interview loop redesign} — standardized rubric, system-design scenarios, and take-home evaluation — increasing hiring pipeline throughput by 60\% while maintaining quality bar.
+    \item Lead threat modelling and architecture reviews for multiple AI products, identifying model-evasion, adversarial-attack, privacy-leakage, and prompt-injection risks.
+    \item Design and implement prompt and input security controls, response guardrails, and policy-as-code governance to prevent AI misuse and unintended model behaviour.
+    \item Secure RAG pipelines end to end through retrieval-integrity validation, embedding security, indirect prompt-injection prevention, and data-provenance controls.
+    \item Write AI security requirements for MCP servers and agentic systems, applying the OWASP LLM Top 10 and MITRE ATLAS frameworks.
+    \item Conduct break-testing and red-teaming exercises to surface vulnerabilities before production deployment; implement observability controls for secure, compliant operation.
+    \item Partner with Cyber Security, AI Engineering, and business stakeholders to embed secure AI practices aligned with governance policies.
 \end{itemize}
-\stackline{Stack}{Apache Kafka, Flink, Pinot, Iceberg, Spark, Airflow, S3, Terraform, Kubernetes, Python, Java}
+\stackline{Focus}{AI/ML threat modelling, RAG security, prompt injection, MCP and agent security, OWASP LLM Top 10, MITRE ATLAS, AWS}
 
-\jobheading{icons/company.png}{StealthLayer}{New York, NY}{Senior Data Engineer}{Mar 2018 -- Dec 2021}
-\subrole{Streaming Infrastructure}
+\jobheading{icons/company.png}{MYOB}{Melbourne, VIC}{Principal Product Security Engineer}{Jun 2022 -- Apr 2025}
+\subrole{GenAI product security and cloud-native application protection}
 \begin{itemize}
     \small
-    \item Replaced a legacy batch ETL pipeline processing \textbf{500M events/day} with a \textbf{real-time streaming architecture} using Kafka Streams and Flink, reducing event-processing latency from 4 hours to under 30 seconds and enabling live fraud-detection models.
-    \item Designed and deployed \textbf{Change Data Capture pipelines} (Debezium + Kafka Connect) ingesting from 40+ MySQL/Postgres shards, enabling near-real-time read replicas and removing the need for nightly batch dumps.
-    \item Built a \textbf{cost-intelligence layer} that tagged every Spark job and S3 object with business-unit and team cost-centers; gave finance granular per-team billing and reduced cloud spend by 25\% through reclaimable-waste identification.
-    \item Implemented \textbf{automated data quality framework} (Great Expectations + Airflow DAG orchestration) with 600+ expectations across 200 tables, cutting data-quality incidents from monthly to under 3 per quarter.
-    \item Mentored 4 junior data engineers through structured onboarding, code review pairing, and internal tech talks; 2 were promoted within 18 months.
+    \item Led GenAI product security initiatives through solution-design reviews and threat modelling using STRIDE, OWASP Top 10, and CWE/SANS Top 25.
+    \item Rolled out CNAPP tooling (Wiz and Orca) for continuous cloud-security posture monitoring and real-time AWS infrastructure visibility.
+    \item Created vulnerability dashboards for leadership, improving accountability and visibility of AI and cloud security risks.
+    \item Implemented automated DevSecOps pipelines integrating SAST, SCA, and DAST for repeatable, scalable security testing aligned to ASD Essential Eight controls.
+    \item Contributed to Agile delivery through sprint planning, threat-model estimation, and continuous security-improvement cycles.
 \end{itemize}
-\stackline{Stack}{Kafka Streams, Flink, Debezium, Airflow, Great Expectations, Spark, S3, Terraform, Docker, Python, Scala}
+\stackline{Stack}{AWS, Wiz, Orca, SAST, SCA, DAST, CI/CD, STRIDE, OWASP, ASD Essential Eight}
 
-\jobheading{icons/company.png}{RiverPoint Analytics}{Boston, MA}{Data Engineer}{Jun 2015 -- Feb 2018}
+\jobheading{icons/company.png}{NBN Australia}{Australia}{Application Security Lead}{Sep 2020 -- Jun 2022}
 \begin{itemize}
     \small
-    \item Built and maintained the company's \textbf{data warehouse and ELT pipeline} (Snowflake + dbt + Airflow) serving analytics and BI for 80+ internal stakeholders; designed dimensional models for finance, marketing, and product domains.
-    \item Developed a \textbf{custom Python-based ETL framework} that abstracted away common ingestion patterns (API polling, S3 event-triggered loads, SFTP pulls) into reusable, testable plugins — reduced new pipeline development time by 70\%.
-    \item Optimized \textbf{Spark batch jobs} processing 5 TB/night of clickstream data: tuned shuffle partitions, switched to columnar encoding, and implemented incremental processing — reduced run time from 6 hours to 45 minutes and cut cluster cost by 60\%.
-    \item Created a \textbf{Snowflake cost-optimization dashboard} using Snowflake's ACCOUNT\_USAGE schema and Streamlit, giving engineering leads visibility into credit consumption by warehouse, query pattern, and team — drove a 30\% reduction in snowflake spend.
+    \item Uplifted enterprise application security across complex multi-team delivery environments using OWASP SAMM and NIST CSF.
+    \item Established security-maturity baselines aligned to the ISM and ISO/IEC 27001.
+    \item Rolled out SAST and SCA capabilities with automated incident reporting to reduce detection time across high-risk applications.
+    \item Implemented secure-code review processes and a security-champion program, embedding security culture across delivery teams.
 \end{itemize}
-\stackline{Stack}{Snowflake, dbt, Airflow, Spark, Python, Streamlit, AWS (S3, EMR, Lambda), PostgreSQL, Redshift}
+\stackline{Stack}{OWASP SAMM, NIST CSF, ISM, ISO/IEC 27001, SAST, SCA, incident reporting, secure code review}
+
+\jobheading{icons/company.png}{AGL Energy}{Australia}{Application Security Engineer}{Aug 2019 -- Sep 2020}
+\begin{itemize}
+    \small
+    \item Designed security-scanning architecture within Azure DevOps CI/CD pipelines using SAST, SCA, and DAST tooling, embedding automated security gates.
+    \item Rolled out a vulnerability-management platform and SDL operational model, improving incident-response workflows and mean time to remediation.
+\end{itemize}
+\stackline{Stack}{Azure DevOps, SAST, SCA, DAST, CI/CD security, vulnerability management, SDL}
+
+\plainheading{\textbf{Application Security Consultant} \textcolor{subtle}{\enspace$\cdot$\enspace Telstra}}{2018 -- 2019}
+\plainheading{\textbf{Senior TS Advisor / PCI QSA} \textcolor{subtle}{\enspace$\cdot$\enspace UL Transaction Security}}{2015 -- 2018}
+\plainheading{\textbf{PKI \& Strong Authentication Developer} \textcolor{subtle}{\enspace$\cdot$\enspace Various}}{2005 -- 2015}
 
 %-------- EDUCATION --------
 \needspace{6\baselineskip}
 \section{Education}
-\eduheading{icons/edu.png}{Massachusetts Institute of Technology}{M.S., Computer Science --- Systems \& Data}{2013 -- 2015}
-\hspace*{-2pt}\eduheading{icons/edu.png}{University of Illinois Urbana-Champaign}{B.S., Computer Engineering}{2009 -- 2013}
+\eduheading{icons/edu.png}{Master of Computer Science}{Postgraduate degree}{ }
+\hspace*{-2pt}\eduheading{icons/edu.png}{Bachelor of Computer Science}{Undergraduate degree}{ }
 \vspace{4pt}
-
-%-------- PROJECTS --------
-\section{Projects}
-
-\iconentry{icons/project.png}{\textbf{Polaris} \textcolor{subtle}{$\cdot$ Declarative Flink streaming framework with auto-scaling} \quad \href{https://github.com/johndoe/polaris}{\faGithub\ GitHub}}{Jan 2025 -- Present}
-\begin{itemize}
-    \small
-    \item Designed a \textbf{YAML-driven Flink DSL} (Parse $\rightarrow$ Optimize $\rightarrow$ Compile $\rightarrow$ Deploy) that lets teams define complex streaming topologies (joins, windowed aggregations, CDC pipelines) without writing a single line of Java or Scala.
-    \item Built an \textbf{auto-scaling executor} that monitors Kafka consumer lag, Flink checkpoint duration, and backpressure metrics to dynamically adjust parallelism — reduced over-provisioning cost by 35\% with zero downtime during rescale.
-    \item Implemented \textbf{pluggable state backends} (RocksDB, Redis, DuckDB) with transparent schema evolution, so users can migrate state stores without pipeline rebuilds.
-    \item Shipped \textbf{native Prometheus metrics export} with pre-built Grafana dashboards for latency, throughput, watermark lag, and checkpoint health — adopted by 4 teams internally.
-\end{itemize}
-\stackline{Acquired Skills}{Apache Flink, Stream Processing, DSL Design, Kubernetes, Prometheus, Grafana, Open-Source}
-
-\iconentry{icons/project.png}{\textbf{Sensor} \textcolor{subtle}{$\cdot$ Cross-platform data quality \& lineage observability} \quad \href{https://github.com/johndoe/sensor}{\faGithub\ GitHub}}{Mar 2024 -- Dec 2024}
-\begin{itemize}
-    \small
-    \item Designed a \textbf{pluggable quality rule engine} (expectation $\rightarrow$ validator $\rightarrow$ action) with 30+ built-in validators (nullness, uniqueness, distribution drift, freshness, referential integrity) expressed as version-controlled YAML policies.
-    \item Built a \textbf{column-level lineage tracker} that intercepts Spark SQL plan nodes via Catalyst extensions, maps input-to-output column provenance, and emits OpenLineage-compatible events to Marquez — deployed across 80+ production pipelines.
-    \item Implemented a \textbf{drifting metrics dashboard} (pre-computed statistical profiles stored in DuckDB, served via a FastAPI backend and a React frontend) that alerted teams when schema or distribution shifts exceeded configurable thresholds — cut data-incident detection time from 6 hours to under 5 minutes.
-\end{itemize}
-\stackline{Acquired Skills}{Spark SQL Catalyst, OpenLineage, Data Quality, React, FastAPI, DuckDB, Statistical Profiling}
 
 %-------- CERTIFICATIONS --------
 \needspace{5\baselineskip}
 \section{Certifications}
 
-\iconentry{icons/cert.png}{\textbf{Google Cloud Professional Data Engineer}}{Jan 2023}
-\vspace{4pt}
-
-\iconentry{icons/cert.png}{\textbf{AWS Certified Data Analytics --- Specialty}}{Mar 2021}
-\vspace{4pt}
-
-\iconentry{icons/cert.png}{\textbf{Databricks Certified Associate Data Engineer}}{Jun 2024}
+\iconentry{icons/cert.png}{\textbf{CISSP} \textcolor{subtle}{(ISC)\textsuperscript{2} \quad$\cdot$\quad CSSLP (ISC)\textsuperscript{2}}}{}
+\vspace{3pt}
+\iconentry{icons/cert.png}{\textbf{AWS Security Engineer} \quad$\cdot$\quad \textbf{PCI QSA} \quad$\cdot$\quad \textbf{PA-DSS QSA}}{}
 \vspace{4pt}
 
 %-------- SKILLS --------
@@ -254,15 +241,13 @@
 \section{Skills}
 \renewcommand{\arraystretch}{1.4}
 \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{accent}}l X@{}}
-    Data Engineering    & Apache Spark, Flink, Kafka, Airflow, dbt, Iceberg, Delta Lake, Pinot, Trino \\
-    Languages           & Python, Java, Scala, SQL, C++, Go, Bash \\
-    Databases           & PostgreSQL, Snowflake, BigQuery, DuckDB, ClickHouse, Redis, MongoDB, Pinot \\
-    Cloud \& DevOps     & AWS, GCP, Azure, Kubernetes, Docker, Terraform, Helm, GitHub Actions, Linux \\
-    Streaming           & Kafka Streams, Flink, Debezium, KSQL, Pulsar, Kinesis \\
-    Machine Learning    & Feature Stores, MLflow, Ray, XGBoost, scikit-learn, embedding pipelines \\
-    Backend \& Tooling  & FastAPI, gRPC, GraphQL, Pydantic, Protobuf, Git, REST \\
-    Observability       & Prometheus, Grafana, Datadog, OpenTelemetry, ELK, Jaeger \\
-    Spoken Languages    & English (Native), Spanish (Professional), German (Conversational) \\
+    AI/ML Security      & Threat modelling, prompt-injection mitigation, data-poisoning prevention, model protection, adversarial-attack defence, privacy-leakage controls, RAG security, MCP and agent security, OWASP LLM Top 10, MITRE ATLAS \\
+    AWS Security        & Security Hub, GuardDuty, IAM, KMS, WAF, Macie, CNAPP (Wiz, Orca) \\
+    Compliance          & ISO/IEC 27001, NIST CSF, PCI DSS, OWASP ASVS, ISM, ASD Essential Eight \\
+    DevSecOps           & SAST, SCA, DAST, CI/CD pipeline security, GitOps, secure MLOps, automated security gates \\
+    Application Security& OWASP SAMM, STRIDE, OWASP Top 10, CWE/SANS Top 25, secure code review, SDL \\
+    Programming         & Python, JavaScript/Node.js, Bash, C\#/.NET, Java \\
+    Delivery            & Agile, Scrum, incident response management, vulnerability assessment, red teaming \\
 \end{tabularx}
 
 \end{document}

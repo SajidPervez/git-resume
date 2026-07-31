@@ -1,5 +1,5 @@
 variant: general
-label: General
-author: "John Doe"
+label: AI Security Principal
+author: "Sajid Pervez"
 template: "Template_Resume.tex"
-output: "JohnDoe_General"
+output: "Sajid_Pervez_AI_Security"

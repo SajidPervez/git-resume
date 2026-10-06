@@ -1,5 +1,5 @@
-variant: dfat-ai-controls-engineer
-label: DFAT — AI Cyber Security & Controls Engineer
+variant: ibm-ai-security-architect
+label: IBM — AI Security Architect
 author: "Sajid Pervez"
 template: "Template_Resume.tex"
-output: "Sajid_Pervez_DFAT_AI_Controls_Engineer"
+output: "Sajid_Pervez_IBM_AI_Security_Architect"

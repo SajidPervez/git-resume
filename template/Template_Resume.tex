@@ -42,6 +42,7 @@
 }
 
 \pagestyle{empty}
+\emergencystretch=3em
 \setlength{\parindent}{0pt}
 \setlist[itemize]{leftmargin=1.2em, topsep=4pt, itemsep=2pt, parsep=0pt, label=\textbullet}
 
@@ -83,7 +84,7 @@
 % #1=icon path (unused)  #2=company  #3=location  #4=role  #5=dates
 \newcommand{\jobheading}[5]{%
   \entrystart\textbf{#4\ \textbar\ #5}\\[2pt]
-  \textcolor{subtle}{#2, #3}\par
+  {\small\textcolor{subtle}{#2, #3}\par}
   \vspace{-1pt}
 }
 
@@ -107,7 +108,7 @@
 % #1=icon path (unused)  #2=school/degree  #3=detail  #4=dates (optional, may be empty)
 \newcommand{\eduheading}[4]{%
   \entrystart\textbf{#2\if\relax\detokenize{#4}\relax\else\ \textbar\ #4\fi}\\[2pt]
-  \textcolor{subtle}{#3}\par
+  {\small\textcolor{subtle}{#3}\par}
 }
 
 % Sub-role heading within a single job entry (e.g. dual-hat responsibilities)
@@ -119,13 +120,13 @@
 % #1=label (e.g. Stack, Focus)  #2=content
 \newcommand{\stackline}[2]{%
   \par\vspace{4pt}\noindent
-  \small\textbf{#1:}~\textcolor{subtle}{#2}\par
+  {\small\textbf{#1:}~\textcolor{subtle}{#2}\par}
   \vspace{1pt}
 }
 
 % Skills row: #1=category  #2=items
 \newcommand{\skillrow}[2]{%
-  \entrystart\small\textbf{#1:} #2\par
+  \entrystart{\small\textbf{#1:} #2\par}
   \global\nextgap=5pt\relax
 }
 

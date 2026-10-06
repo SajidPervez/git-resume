@@ -1,6 +1,7 @@
 %-------------------------
 % Resume in LaTeX
-% Minimal black-and-white sans-serif layout, ATS-friendly
+% Two-column layout: section labels on the left, content on the right,
+% hairline rules between sections. Black-and-white, ATS-friendly.
 %-------------------------
 
 \documentclass[letterpaper,10pt]{article}
@@ -15,29 +16,24 @@
     BoldItalicFont=Ubuntu-BoldItalic,
     Numbers=Monospaced
 ]
-\usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage[dvipsnames,table]{xcolor}
 \usepackage[hidelinks]{hyperref}
-\usepackage{fancyhdr}
-\usepackage{tabularx}
-\usepackage{fontawesome5}
 \usepackage{geometry}
+\usepackage{changepage}
 \usepackage{graphicx}
 \usepackage{needspace}
 
 \geometry{
     letterpaper,
-    left=0.72in,
-    right=0.72in,
-    top=0.68in,
-    bottom=0.62in
+    left=0.7in,
+    right=0.7in,
+    top=0.7in,
+    bottom=0.65in
 }
 
-% Minimal monochrome palette
 \definecolor{accent}{HTML}{000000}
 \definecolor{subtle}{HTML}{3F3F3F}
-\definecolor{rule}{HTML}{C9C9C9}
 
 \hypersetup{
     colorlinks=true,
@@ -45,108 +41,120 @@
     linkcolor=accent
 }
 
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.2em, topsep=4pt, itemsep=2pt, parsep=0pt, label=\textbullet}
 
-% Section formatting --- restrained uppercase heading with a hairline divider
-\titleformat{\section}
-  {\large\bfseries\addfontfeatures{LetterSpace=5.0}\color{accent}}
-  {}{0em}
-  {\MakeUppercase}
-  [\vspace{5pt}\color{rule}\titlerule\color{black}]
-\titlespacing*{\section}{0pt}{15pt}{8pt}
+%-------- Layout machinery --------
+% Each section is a resumesection environment: a hairline rule (except before
+% the first section), then content indented by \labelw. The section label is
+% hung into the left margin on the first line of the first entry.
+\newlength{\labelw}
+\setlength{\labelw}{1.45in}
+\newlength{\nextgap}
+\newcounter{secn}
+\newcommand{\sectionlabel}{}
 
-% Custom commands
-% Retain the existing macro signatures, but present a clean text-first layout.
-\newlength{\bodyindent}
-\setlength{\bodyindent}{0pt}
-
-% #1=icon path  #2=company  #3=location  #4=role  #5=dates
-\newcommand{\jobheading}[5]{%
-  \vspace{10pt}
-  \noindent
-  \textbf{#2}\hfill\textcolor{subtle}{#3}\\[-1pt]
-  {\small\textcolor{subtle}{\textit{#4}}\hfill\textcolor{subtle}{#5}}
-  \vspace{-2pt}
+% Starts an entry: vertical gap, then the pending section label (if any)
+\newcommand{\entrystart}{%
+  \par\vspace{\nextgap}\global\nextgap=9pt\relax\noindent
+  \ifx\sectionlabel\empty\else
+    \kern-\labelw
+    \parbox[t]{\dimexpr\labelw-1em\relax}{\raggedright\small\bfseries\addfontfeatures{LetterSpace=0.5}\sectionlabel}%
+    \kern1em
+    \global\let\sectionlabel\empty
+  \fi
 }
 
-% Entry without icon, but aligned with iconned entries
+% #1=LABEL (write in capitals)
+\newenvironment{resumesection}[1]{%
+  \par\needspace{6\baselineskip}%
+  \stepcounter{secn}%
+  \ifnum\value{secn}>1
+    \par\vspace{11pt}\noindent\hspace*{\labelw}\rule{\dimexpr\linewidth-\labelw\relax}{0.5pt}\par\vspace{11pt}%
+  \fi
+  \gdef\sectionlabel{#1}\global\nextgap=0pt\relax
+  \begin{adjustwidth}{\labelw}{0pt}%
+}{%
+  \end{adjustwidth}\par
+}
+
+%-------- Entry macros --------
+% #1=icon path (unused)  #2=company  #3=location  #4=role  #5=dates
+\newcommand{\jobheading}[5]{%
+  \entrystart\textbf{#4\ \textbar\ #5}\\[2pt]
+  \textcolor{subtle}{#2, #3}\par
+  \vspace{-1pt}
+}
+
 % #1=title  #2=date
 \newcommand{\plainheading}[2]{%
-  \vspace{7pt}
-  \noindent
-  \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
-    #1 & \small\textcolor{subtle}{#2} \\
-  \end{tabular*}
-  \vspace{-2pt}
+  \entrystart\textbf{#1\ \textbar\ #2}\par
+  \global\nextgap=6pt\relax
 }
 
-% Entry with icon, single-line (for certs, projects)
-% #1=icon  #2=title  #3=date
+% #1=icon path (unused)  #2=title  #3=date (optional, may be empty)
 \newcommand{\iconentry}[3]{%
-  \vspace{7pt}
-  \noindent
-  #2\hfill\small\textcolor{subtle}{#3}
-  \vspace{-2pt}
+  \entrystart #2\if\relax\detokenize{#3}\relax\else\ \textbar\ \textbf{#3}\fi\par
+  \global\nextgap=5pt\relax
 }
 
+% #1=title  #2=date
 \newcommand{\projheading}[2]{%
-  \vspace{2pt}
-  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-    #1 & \textcolor{subtle}{#2} \\
-  \end{tabular*}
-  \vspace{-6pt}
+  \entrystart\textbf{#1\ \textbar\ #2}\par
 }
 
-% #1=icon  #2=school  #3=degree  #4=dates
+% #1=icon path (unused)  #2=school/degree  #3=detail  #4=dates (optional, may be empty)
 \newcommand{\eduheading}[4]{%
-  \vspace{7pt}
-  \noindent
-  \textbf{#2}\hfill\small\textcolor{subtle}{#4}\\[-1pt]
-  {\small\textcolor{subtle}{#3}}
-  \vspace{-2pt}
+  \entrystart\textbf{#2\if\relax\detokenize{#4}\relax\else\ \textbar\ #4\fi}\\[2pt]
+  \textcolor{subtle}{#3}\par
 }
-
-\setlist[itemize]{leftmargin=1.25em, topsep=4pt, itemsep=2pt, parsep=0pt, label=\color{accent}\textbullet}
 
 % Sub-role heading within a single job entry (e.g. dual-hat responsibilities)
 \newcommand{\subrole}[1]{%
-  \par\vspace{5pt}\noindent
-  \textbf{\small\color{accent}\addfontfeatures{LetterSpace=1.4}#1}\par\vspace{-1pt}%
+  \par\vspace{4pt}\noindent{\small\itshape\color{subtle}#1}\par\vspace{-1pt}%
 }
 
 % Highlight tag row beneath job/project title --- appears outside bullet list
-% #1=label (e.g. Stack, Acquired Skills)  #2=content
+% #1=label (e.g. Stack, Focus)  #2=content
 \newcommand{\stackline}[2]{%
   \par\vspace{4pt}\noindent
-  \small\textbf{\color{accent}#1:}~\textcolor{subtle}{#2}\par
-  \vspace{2pt}
+  \small\textbf{#1:}~\textcolor{subtle}{#2}\par
+  \vspace{1pt}
 }
 
-\setlength{\parindent}{0pt}
+% Skills row: #1=category  #2=items
+\newcommand{\skillrow}[2]{%
+  \entrystart\small\textbf{#1:} #2\par
+  \global\nextgap=5pt\relax
+}
 
 \begin{document}
 
 %-------- HEADER --------
-\begin{center}
-    {\fontsize{24}{28}\selectfont\bfseries\addfontfeatures{LetterSpace=7.0}\MakeUppercase{Sajid Pervez}} \\[5pt]
-    {\small\bfseries\addfontfeatures{LetterSpace=4.0}\color{accent} AI Cyber Security \& Controls Engineer} \\[9pt]
-    {\footnotesize\itshape\color{subtle}
-        \faPhone\ 0469 366 692 \quad
-        \faEnvelope\ \href{mailto:sajid@sajidpervez.com}{sajid@sajidpervez.com} \quad
-        \faLinkedin\ \href{https://linkedin.com/in/sajidpervez}{linkedin.com/in/sajidpervez} \quad
-        \faMapMarker*\ Melbourne, VIC
-    }
-\end{center}
+\noindent{\fontsize{27}{31}\selectfont\bfseries Sajid Pervez}\hfill{\large AI Cyber Security \& Controls Engineer}\par
+\vspace{22pt}
+
+%-------- CONTACT --------
+\begin{resumesection}{CONTACT}
+\entrystart
+\begin{minipage}[t]{0.5\linewidth}\small
+  \textbf{Phone}: 0469 366 692\\
+  \textbf{Email}: \href{mailto:sajid@sajidpervez.com}{sajid@sajidpervez.com}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}\small
+  \textbf{LinkedIn}: \href{https://linkedin.com/in/sajidpervez}{linkedin.com/in/sajidpervez}\\
+  \textbf{Location}: Melbourne, VIC
+\end{minipage}
+\end{resumesection}
 
 %-------- SUMMARY --------
-\vspace{10pt}
-{\small AI cyber security and controls leader with 15+ years securing software, cloud, and AI/ML systems. Hands-on experience defining AI security requirements, assessing AI risk, leading threat modelling, and implementing governance controls for production AI, RAG, and agentic systems on AWS. Brings deep NIST, ISM, ASD Essential Eight, secure-SDLC, vulnerability-management, and stakeholder-engagement experience. Prior NV1 security clearance (inactive).\par}
+\begin{resumesection}{SUMMARY}
+\entrystart\small AI cyber security and controls leader with 15+ years securing software, cloud, and AI/ML systems. Hands-on experience defining AI security requirements, assessing AI risk, leading threat modelling, and implementing governance controls for production AI, RAG, and agentic systems on AWS. Brings deep NIST, ISM, ASD Essential Eight, secure-SDLC, vulnerability-management, and stakeholder-engagement experience. Prior NV1 security clearance (inactive).\par
+\end{resumesection}
 
 %-------- EXPERIENCE --------
-\section{Experience}
+\begin{resumesection}{PROFESSIONAL EXPERIENCE}
 
 \jobheading{icons/company.png}{MYOB}{Melbourne, VIC}{Principal AI Security Engineer}{May 2025 -- Present}
 \subrole{AI security governance, controls, and risk leadership for AWS-hosted products}
@@ -191,40 +199,34 @@
 \end{itemize}
 \stackline{Stack}{Azure DevOps, SAST, SCA, DAST, CI/CD security, vulnerability management, SDL}
 
-\plainheading{\textbf{Application Security Consultant} \textcolor{subtle}{\enspace$\cdot$\enspace Telstra}}{2018 -- 2019}
-\plainheading{\textbf{Senior TS Advisor / PCI QSA} \textcolor{subtle}{\enspace$\cdot$\enspace UL Transaction Security}}{2015 -- 2018}
-\plainheading{\textbf{PKI \& Strong Authentication Developer} \textcolor{subtle}{\enspace$\cdot$\enspace Various}}{2005 -- 2015}
+\plainheading{Application Security Consultant, Telstra}{2018 -- 2019}
+\plainheading{Senior TS Advisor / PCI QSA, UL Transaction Security}{2015 -- 2018}
+\plainheading{PKI \& Strong Authentication Developer, Various}{2005 -- 2015}
+\end{resumesection}
 
 %-------- EDUCATION --------
-\needspace{6\baselineskip}
-\section{Education}
-\eduheading{icons/edu.png}{Master of Computer Science}{Postgraduate degree}{ }
-\hspace*{-2pt}\eduheading{icons/edu.png}{Bachelor of Computer Science}{Undergraduate degree}{ }
-\vspace{4pt}
+\begin{resumesection}{EDUCATION}
+\eduheading{icons/edu.png}{Master of Computer Science}{Postgraduate degree}{}
+\eduheading{icons/edu.png}{Bachelor of Computer Science}{Undergraduate degree}{}
+\end{resumesection}
 
 %-------- CERTIFICATIONS --------
-\needspace{5\baselineskip}
-\section{Certifications}
-
+\begin{resumesection}{CERTIFICATES}
 \iconentry{icons/cert.png}{\textbf{CISSP} \textcolor{subtle}{(ISC)\textsuperscript{2} \quad$\cdot$\quad CSSLP (ISC)\textsuperscript{2}}}{}
-\vspace{3pt}
 \iconentry{icons/cert.png}{\textbf{AWS Security Engineer} \quad$\cdot$\quad \textbf{PCI QSA} \quad$\cdot$\quad \textbf{PA-DSS QSA}}{}
-\vspace{4pt}
+\end{resumesection}
 
 %-------- SKILLS --------
-\needspace{8\baselineskip}
-\section{Skills}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{accent}}l X@{}}
-    AI Governance \& Controls & AI security requirements, AI risk assessment, AI governance controls, policy-as-code, threat modelling, responsible deployment, monitoring and assurance \\
-    AI/ML Security      & LLM guardrails, prompt-injection mitigation, data-poisoning prevention, model protection, adversarial-attack defence, privacy-leakage controls, RAG security, MCP and agent security, OWASP LLM Top 10, MITRE ATLAS \\
-    AWS Security        & Security Hub, GuardDuty, IAM, KMS, WAF, Macie, CNAPP (Wiz, Orca) \\
-    Compliance          & ISO/IEC 27001, NIST CSF, PCI DSS, OWASP ASVS, ISM, ASD Essential Eight \\
-    DevSecOps           & SAST, SCA, DAST, static and dynamic security testing, CI/CD pipeline security, GitOps, secure MLOps, automated security gates \\
-    Security Architecture& Security architecture reviews, secure-by-design requirements, threat modelling, security design patterns, risk-based guidance, cloud-native application security \\
-    Application Security& OWASP SAMM, STRIDE, OWASP Top 10, CWE/SANS Top 25, secure code review, secure SDLC, SDL \\
-    Programming         & Python, JavaScript/Node.js, Bash, C\#/.NET, Java \\
-    Delivery            & Agile, Scrum, incident response management, vulnerability assessment, red teaming \\
-\end{tabularx}
+\begin{resumesection}{SKILLS}
+\skillrow{AI Governance \& Controls}{AI security requirements, AI risk assessment, AI governance controls, policy-as-code, threat modelling, responsible deployment, monitoring and assurance}
+\skillrow{AI/ML Security}{LLM guardrails, prompt-injection mitigation, data-poisoning prevention, model protection, adversarial-attack defence, privacy-leakage controls, RAG security, MCP and agent security, OWASP LLM Top 10, MITRE ATLAS}
+\skillrow{AWS Security}{Security Hub, GuardDuty, IAM, KMS, WAF, Macie, CNAPP (Wiz, Orca)}
+\skillrow{Compliance}{ISO/IEC 27001, NIST CSF, PCI DSS, OWASP ASVS, ISM, ASD Essential Eight}
+\skillrow{DevSecOps}{SAST, SCA, DAST, static and dynamic security testing, CI/CD pipeline security, GitOps, secure MLOps, automated security gates}
+\skillrow{Security Architecture}{Security architecture reviews, secure-by-design requirements, threat modelling, security design patterns, risk-based guidance, cloud-native application security}
+\skillrow{Application Security}{OWASP SAMM, STRIDE, OWASP Top 10, CWE/SANS Top 25, secure code review, secure SDLC, SDL}
+\skillrow{Programming}{Python, JavaScript/Node.js, Bash, C\#/.NET, Java}
+\skillrow{Delivery}{Agile, Scrum, incident response management, vulnerability assessment, red teaming}
+\end{resumesection}
 
 \end{document}

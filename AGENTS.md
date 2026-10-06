@@ -158,7 +158,10 @@ inline. The download button still links directly to the GitHub Releases URL.
 - Custom macros defined near the top of the `.tex` file: `\jobheading`,
   `\eduheading`, `\projheading`, `\iconentry`, `\plainheading`, `\subrole`,
   `\stackline`. Use these rather than hand-rolling raw LaTeX for each entry.
-  Sections present: Experience, Education, Projects, Certifications, Skills.
+  Sections present: Contact, Summary, Professional Experience, Education,
+  Certificates, Skills. Each section is a `resumesection{LABEL}` environment
+  (label in capitals, hung in the left column); wrap new entries in one.
+  `\skillrow{Category}{items}` renders a Skills line.
 - **The name on the PDF is hardcoded**, not templated — it's set directly in the
   `\MakeUppercase{...}` header inside the `.tex` file. `resume.yml`'s `author`
   field only feeds the CI-generated webpage title and release notes; changing

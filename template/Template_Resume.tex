@@ -83,6 +83,7 @@
 %-------- Entry macros --------
 % #1=icon path (unused)  #2=company  #3=location  #4=role  #5=dates
 \newcommand{\jobheading}[5]{%
+  \par\needspace{5\baselineskip}%
   \entrystart\textbf{#4\ \textbar\ #5}\\[2pt]
   {\small\textcolor{subtle}{#2, #3}\par}
   \vspace{-1pt}
